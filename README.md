@@ -34,20 +34,20 @@ local d = duo.new({
 local res, err = d:duo_request('check')
 
 if not res then
-  return false, "Could not contact Duo API server"
+  ngx.log(ngx.ERR, "Could not contact Duo API server")
 end
 
 if res.status ~= 200 then
-  return false, "Duo API server returned invalid status code"
+  ngx.log(ngx.ERR, "Duo API server returned invalid status code")
 end
 
 local body = cjson.decode(res.body)
 if not body then
-  return false, "Could not decode Duo API server response"
+  ngx.log(ngx.ERR, "Could not decode Duo API server response")
 end
 
 if body.stat ~= "OK" then
-  return false, "Duo API server returned invalid API response"
+  ngx.log(ngx.ERR, "Duo API server returned invalid API response")
 end
 
 
@@ -70,6 +70,7 @@ if err then
   ngx.log(ngx.ERR, msg)
 end
 
+
 -- from here, examine the 'preauth.result' value and act accordingly. refer to the API
 -- documentation for details. in the case of an 'auth' result, request should be
 -- authenticated with Duo
@@ -81,9 +82,8 @@ end
 if auth.result == "deny" then
   ngx.exit(ngx.HTTP_UNAUTHORIZED)
 end
-
-return true
 ```
+
 
 Usage
 =====
