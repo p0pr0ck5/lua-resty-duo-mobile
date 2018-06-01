@@ -106,7 +106,6 @@ local function duo_request(self, endpoint, api_params)
     local req_tab = {
         method  = method,
         headers = headers,
-        ssl_verify = false,
     }
     if is_post then
         req_tab.headers["Content-Type"] = "application/x-www-form-urlencoded"
