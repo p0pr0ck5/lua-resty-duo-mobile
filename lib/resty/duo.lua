@@ -148,14 +148,14 @@ end
 
 
 function _M:enroll(username)
-    return read_duo_response(duo_request(self, 'enroll', {
+    return read_duo_response(duo_request(self, "enroll", {
         username = username,
     }))
 end
 
 
 function _M:preauth(username, ip)
-    return read_duo_response(duo_request(self, 'preauth', {
+    return read_duo_response(duo_request(self, "preauth", {
         username = username,
         ipaddr   = ip,
     }))
@@ -174,7 +174,7 @@ function _M:auth(username, factor, opts)
     end
 
 
-    return read_duo_response(duo_request(self, 'auth', params))
+    return read_duo_response(duo_request(self, "auth", params))
 end
 
 
