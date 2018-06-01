@@ -17,6 +17,7 @@ Synopsis
 ========
 
 ```lua
+local cjson = require "cjson.safe"
 local duo = require "resty.duo"
 
 
