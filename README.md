@@ -96,9 +96,9 @@ duo.new
 
 Create a new `duo` object based on the Duo Application configuration options:
 
-**opts.ikey**: The application integration key.
-**opts.skey**: The application secret key.
-**opts.host**: The application hostname.
+* **opts.ikey**: The application integration key.
+* **opts.skey**: The application secret key.
+* **opts.host**: The application hostname.
 
 duo:enroll
 ----------
@@ -110,7 +110,7 @@ Enroll a new user with the Duo application. On sucess, `err` will be nil and `re
 duo:preauth
 -----------
 
-**syntax**: *preauth, err = duo:preauth(username, ipaddr)*
+**syntax**: *preauth, err = duo:preauth(username, ipaddr?)*
 
 Pre-authenticate a user with the Duo Auth API. This method determines whether a user is authorized to log in, and (if so) returns the user's available authentication factors. On sucess, `err` will be nil and `res` will be a table returned from the `/preauth` Duo Auth API endpoint. If there is a failure in the HTTP transaction or an API err, `res` will be nil and `err` will be a string describing the failure. The string may be JSON-encoded data if an error is returned from the Duo Auth API.
 
@@ -128,7 +128,7 @@ The appropriate `factor` and `duo_params` method parameters should be defined ba
 duo:duo_request
 ---------------
 
-**syntax**: *res, err = duo:duo_request(endpoint, api_params)
+**syntax**: *res, err = duo:duo_request(endpoint, api_params)*
 
 Low-level call to generate a Duo Auth API request based on the API endpoint and appropriate parameters. This method will sign the HTTP request with the `duo` object's `ikey`/`skey` values, and return the request of a `lua-resty-http:request_uri` call.
 
